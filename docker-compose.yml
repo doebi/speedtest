@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  speedtest:
+    build: .
+    #image: doebi/speedtest
+    environment:
+      - DB_HOST=http://localhost:8086
+      - DB_NAME=speedtest
+      - DB_USERNAME=admin
+      - DB_PASSWORD=password
+    volumes:
+      - ./scripts/:/opt/monitor/:ro
+    depends_on:
+      - influxdb
+    network_mode: host
+
+  grafana:
+    image: grafana/grafana:latest
+    restart: always
+    ports:
+      - 3004:3000
+    volumes:
+      - grafana:/var/lib/grafana
+
+  influxdb:
+    image: influxdb:1.8.3
+    volumes:
+      - influxdb:/var/lib/influxdb
+    ports:
+      - 8086:8086
+    environment:
+      - INFLUXDB_ADMIN_USER="admin"
+      - INFLUXDB_ADMIN_PASSWORD="password"
+      - INFLUXDB_DB="speedtest"
+
+volumes:
+  grafana:
+  influxdb:
