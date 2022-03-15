@@ -3,6 +3,7 @@ version: '3'
 services:
   speedtest:
     build: .
+    restart: always
     #image: doebi/speedtest
     environment:
       - DB_HOST=http://localhost:8086
@@ -25,6 +26,7 @@ services:
 
   influxdb:
     image: influxdb:1.8.3
+    restart: always
     volumes:
       - influxdb:/var/lib/influxdb
     ports:

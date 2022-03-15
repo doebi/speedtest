@@ -7,10 +7,11 @@ DB_PASSWORD="${DB_PASSWORD:-password}"
 DATE=$(date +%s)
 GW=$(ip -4 route | awk '/^default/ { print $3 }')
 COUNT=20
+TIMEOUT=1
 
 for host in $GW 1.1.1.1 8.8.8.8; do
 
-  result=$(ping -c $COUNT $host)
+  result=$(ping -c $COUNT -W $TIMEOUT $host)
   #min=$(echo $result | awk -F"[,/]" '/round/{print $5}')
   avg=$(echo $result | awk -F"[,/]" '/round/{print $6}')
   #max=$(echo $result | awk -F"[,/]" '/round/{print $7}')

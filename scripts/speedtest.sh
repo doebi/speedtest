@@ -16,12 +16,12 @@ UPLOAD="$(echo $JSON | jq -r '.upload.bandwidth')"
 curl -s -S -XPOST "$DB_HOST/write?db=$DB_NAME&precision=s&u=$DB_USERNAME&p=$DB_PASSWORD" \
     --data-binary "bandwidth,server=$SERVER down=$DOWNLOAD,up=$UPLOAD $DATE"
 
-PING="$(echo $JSON | jq -r '.ping.latency')"
-JITTER="$(echo $JSON | jq -r '.ping.jitter')"
-LOSS="$(echo $JSON | jq -r '.packetLoss')"
-if [[ $LOSS == NULL ]] ;
-then
-  LOSS=0
-fi
-curl -s -S -XPOST "$DB_HOST/write?db=$DB_NAME&precision=s&u=$DB_USERNAME&p=$DB_PASSWORD" \
-    --data-binary "latency,server=$SERVER ping=$PING,jitter=$JITTER,loss=$LOSS $DATE"
+#PING="$(echo $JSON | jq -r '.ping.latency')"
+#JITTER="$(echo $JSON | jq -r '.ping.jitter')"
+#LOSS="$(echo $JSON | jq -r '.packetLoss')"
+#if [[ $LOSS == NULL ]] ;
+#then
+#  LOSS=0
+#fi
+#curl -s -S -XPOST "$DB_HOST/write?db=$DB_NAME&precision=s&u=$DB_USERNAME&p=$DB_PASSWORD" \
+#    --data-binary "latency,server=$SERVER ping=$PING,jitter=$JITTER,loss=$LOSS $DATE"
