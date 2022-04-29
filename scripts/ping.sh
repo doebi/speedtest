@@ -6,6 +6,7 @@ DB_PASSWORD="${DB_PASSWORD:-password}"
 
 DATE=$(date +%s)
 GW=$(ip -4 route | awk '/^default/ { print $3 }')
+PUBLIC_IP=$(curl ifconfig.me)
 COUNT=20
 TIMEOUT=1
 
@@ -18,6 +19,6 @@ for host in $GW 1.1.1.1 8.8.8.8; do
   loss=$(echo $result | grep -o "[0-9]\+%" | cut -f1 -d% )
 
   curl -s -S -XPOST "$DB_HOST/write?db=$DB_NAME&precision=s&u=$DB_USERNAME&p=$DB_PASSWORD" \
-    --data-binary "ping,host=$host avg=$avg,loss=$loss $DATE"
+    --data-binary "ping,host=$host,public=$PUBLIC_IP avg=$avg,loss=$loss $DATE"
 
 done

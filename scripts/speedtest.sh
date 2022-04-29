@@ -10,11 +10,12 @@ JSON=$(speedtest --accept-license --accept-gdpr -f json)
 
 SERVER="$(echo $JSON | jq -r '.server.host')"
 ISP="$(echo $JSON | jq -r '.isp')"
+PUBLIC_IP=$(curl ifconfig.me)
 
 DOWNLOAD="$(echo $JSON | jq -r '.download.bandwidth')"
 UPLOAD="$(echo $JSON | jq -r '.upload.bandwidth')"
 curl -s -S -XPOST "$DB_HOST/write?db=$DB_NAME&precision=s&u=$DB_USERNAME&p=$DB_PASSWORD" \
-    --data-binary "bandwidth,server=$SERVER down=$DOWNLOAD,up=$UPLOAD $DATE"
+    --data-binary "bandwidth,server=$SERVER,public=$PUBLIC_IP down=$DOWNLOAD,up=$UPLOAD $DATE"
 
 #PING="$(echo $JSON | jq -r '.ping.latency')"
 #JITTER="$(echo $JSON | jq -r '.ping.jitter')"
