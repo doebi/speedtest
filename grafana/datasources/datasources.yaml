@@ -1,0 +1,11 @@
+apiVersion: 1
+
+datasources:
+  - name: local-influxdb
+    type: influxdb
+    access: proxy
+    database: speedtest
+    user: admin
+    url: http://influxdb:8086
+    secureJsonData:
+      password: password

@@ -23,6 +23,7 @@ services:
     volumes:
       - grafana:/var/lib/grafana
       - ./grafana/dashboards/:/etc/grafana/provisioning/dashboards/
+      - ./grafana/datasources/:/etc/grafana/provisioning/datasources/
 
   influxdb:
     image: influxdb:1.8.3
