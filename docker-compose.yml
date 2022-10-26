@@ -2,16 +2,15 @@ version: '3'
 
 services:
   speedtest:
-    build: .
+    build: app
     restart: always
-    #image: doebi/speedtest
     environment:
       - DB_HOST=http://localhost:8086
       - DB_NAME=speedtest
       - DB_USERNAME=admin
       - DB_PASSWORD=password
     volumes:
-      - ./scripts/:/opt/monitor/:ro
+      - ./app/scripts/:/opt/monitor/:ro
     depends_on:
       - influxdb
     network_mode: host
@@ -23,6 +22,7 @@ services:
       - 3004:3000
     volumes:
       - grafana:/var/lib/grafana
+      - ./grafana/dashboards/:/etc/grafana/provisioning/dashboards/
 
   influxdb:
     image: influxdb:1.8.3
