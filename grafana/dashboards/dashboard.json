@@ -875,6 +875,7 @@
       "pluginVersion": "9.2.4",
       "targets": [
         {
+          "alias": "$tag_host",
           "datasource": {
             "type": "influxdb",
             "uid": "P3C6603E967DC8568"
@@ -1240,7 +1241,7 @@
       "pluginVersion": "8.2.3",
       "targets": [
         {
-          "alias": " ",
+          "alias": "$tag_host",
           "datasource": {
             "type": "influxdb",
             "uid": "P3C6603E967DC8568"

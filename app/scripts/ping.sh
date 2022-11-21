@@ -18,7 +18,7 @@ while :; do
 
   PUBLIC_IP=$(curl -s ifconfig.me)
 
-  for host in 10.13.37.1 1.1.1.1 8.8.8.8 149.154.152.154 5.75.161.245; do
+  for host in 10.13.37.1 10.13.42.1 1.1.1.1 8.8.8.8 149.154.152.154 5.75.161.245; do
     probe $host $PUBLIC_IP &
   done
 
