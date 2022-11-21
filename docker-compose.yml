@@ -2,7 +2,7 @@ version: '3'
 
 services:
   ping-a1:
-    build: ping
+    build: app
     restart: always
     environment:
       - DB_HOST=http://influxdb:8086
@@ -10,7 +10,7 @@ services:
       - DB_USERNAME=admin
       - DB_PASSWORD=password
     volumes:
-      - ./ping/:/opt/monitor/:ro
+      - ./app/scripts/:/opt/monitor/:ro
     depends_on:
       - influxdb
 
