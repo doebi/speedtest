@@ -803,16 +803,24 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "dark-green",
                 "value": null
+              },
+              {
+                "color": "green",
+                "value": 15
               },
               {
                 "color": "#EAB839",
                 "value": 30
               },
               {
-                "color": "red",
+                "color": "orange",
                 "value": 60
+              },
+              {
+                "color": "red",
+                "value": 90
               }
             ]
           }
