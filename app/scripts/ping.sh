@@ -5,13 +5,14 @@ DB_USERNAME="${DB_USERNAME:-admin}"
 DB_PASSWORD="${DB_PASSWORD:-password}"
 
 COUNT=1
-TIMEOUT=20
+TIMEOUT=10
 
 probe(){
   DATE=$(date +%s)
   result=$(ping -c $COUNT -W $TIMEOUT $host)
+  loss=$?
   value=$(echo $result | sed 's/^.*\=\ \([0-9]*\.[0-9]*\).*$/\1/')
-  curl -s -S -XPOST "$DB_HOST/write?db=$DB_NAME&precision=s&u=$DB_USERNAME&p=$DB_PASSWORD" --data-binary "ping,host=$1,public=$2 value=$value $DATE"
+  curl -s -S -XPOST "$DB_HOST/write?db=$DB_NAME&precision=s&u=$DB_USERNAME&p=$DB_PASSWORD" --data-binary "ping,host=$1,public=$2 value=$value,loss=$loss $DATE"
 }
 
 while :; do
