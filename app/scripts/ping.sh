@@ -22,6 +22,6 @@ while :; do
     probe $host $PUBLIC_IP &
   done
 
-  sleep 0.5;
+  sleep 2;
 
 done
